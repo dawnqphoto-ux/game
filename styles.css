@@ -1,0 +1,92 @@
+:root{
+  --sky:#bcefff; --cream:#fffdf0; --blue:#2378e8; --blue2:#0e63d8;
+  --orange:#f26a08; --ink:#3f6fa8; --pink:#ff7ca8; --green:#39a85b;
+}
+*{box-sizing:border-box}
+html,body{width:100%;min-height:100%;margin:0}
+body{
+  min-height:100dvh; overflow:hidden; display:flex; flex-direction:column;
+  color:var(--ink); font-family:"Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+  background:linear-gradient(180deg,#9de7f6 0%,#d9f8f3 43%,#fffde5 77%,#d5f6a2 100%);
+  position:relative; isolation:isolate;
+}
+body:before{
+  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 8% 16%,rgba(255,255,255,.88) 0 4%,transparent 4.5%),
+    radial-gradient(ellipse at 14% 17%,rgba(255,255,255,.82) 0 5%,transparent 5.5%),
+    radial-gradient(ellipse at 85% 24%,rgba(255,255,255,.7) 0 4%,transparent 4.5%),
+    radial-gradient(ellipse at 92% 26%,rgba(255,255,255,.72) 0 5%,transparent 5.5%),
+    radial-gradient(ellipse at 2% 73%,#83d56b 0 8%,transparent 8.5%),
+    radial-gradient(ellipse at 100% 78%,#93dd70 0 9%,transparent 9.5%),
+    radial-gradient(ellipse at 12% 100%,#a6e85e 0 15%,transparent 15.5%),
+    radial-gradient(ellipse at 87% 105%,#b8ed64 0 18%,transparent 18.5%);
+}
+body:after{
+  content:""; position:fixed; z-index:-1; left:-5%;right:-5%;bottom:-9vh;height:25vh;
+  background:linear-gradient(170deg,#b7ee68,#84d94d 60%,#62c94c);
+  border-radius:50% 50% 0 0 / 20% 20% 0 0;
+  box-shadow:0 -10px 25px #d8f8a8;
+}
+.stage{
+  flex:1; min-height:0; width:100%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:clamp(12px,2.3vh,24px);
+  text-align:center; padding:clamp(12px,2.5vh,28px) 16px 8px; overflow:auto;
+}
+.res{font-size:clamp(20px,3.2vw,34px);font-weight:900;min-height:1.25em;text-shadow:0 2px 0 #fff}
+.res.ok{color:#239a55}.res.no{color:#d84a4a}
+.pics{
+  --w:min(48vw,430px);--h:min(39vh,340px);
+  display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:center;width:100%;
+}
+.pic{
+  animation:pop .45s ease-out; display:flex; flex-direction:column; align-items:center;
+  gap:8px; min-width:0;
+}
+.word{
+  font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.1;color:#f16b08;
+  text-shadow:0 2px 0 #fff,0 4px 0 rgba(59,117,171,.12);margin:0 0 4px;
+}
+.emo{
+  width:clamp(190px,29vw,300px);height:clamp(190px,29vw,300px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(100px,18vw,180px);line-height:1;
+  background:rgba(255,255,255,.96);border:4px solid #83b9f4;border-radius:28px;
+  box-shadow:0 9px 0 rgba(70,133,198,.12),0 15px 26px rgba(54,122,179,.12);
+}
+.emo img{width:100%;height:100%;padding:14px;object-fit:contain;display:block}
+.hl{color:#ed5791}
+.hint{
+  max-width:850px;padding:0 12px;color:#4778ae;font-weight:800;
+  font-size:clamp(18px,2.8vw,28px);line-height:1.4;
+  text-shadow:0 1px 0 rgba(255,255,255,.95);
+}
+.hint b{color:#f05b8b}
+.bar{width:100%;padding:8px 16px max(18px,env(safe-area-inset-bottom));text-align:center;flex-shrink:0}
+.status{min-height:1.4em;font-size:clamp(15px,2vw,20px);font-weight:700;margin-bottom:8px;color:#d94c55}
+.mic{
+  min-width:clamp(150px,20vw,220px);min-height:clamp(76px,10vw,108px);
+  font:inherit;font-size:clamp(22px,3vw,30px);font-weight:900;color:#fff;
+  background:linear-gradient(145deg,#38a0ff,#0860df);border:5px solid #fff;
+  border-radius:100px;padding:14px 30px;cursor:pointer;
+  box-shadow:0 7px 0 #2e78d0,0 12px 22px rgba(30,104,206,.25);
+  text-shadow:0 2px 2px rgba(0,0,0,.12);transition:transform .15s,filter .15s;
+}
+.mic:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.mic:active{transform:translateY(4px);box-shadow:0 3px 0 #2e78d0}
+.mic.rec{background:linear-gradient(145deg,#ff8d9f,#e94162);animation:pulse .85s infinite}
+@keyframes pop{0%{transform:scale(.72);opacity:0}75%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+@keyframes pulse{50%{transform:scale(1.045);filter:brightness(1.1)}}
+@media(max-width:600px){
+  body{overflow:auto}
+  .stage{justify-content:center;gap:12px;padding-top:18px}
+  .pics{--w:80vw;--h:32vh}
+  .emo{width:min(68vw,270px);height:min(68vw,270px);border-radius:24px}
+  .bar{padding-bottom:max(22px,env(safe-area-inset-bottom))}
+}
+@media(max-height:650px) and (min-width:601px){
+  .stage{gap:8px;padding-top:6px}
+  .emo{width:min(25vw,220px);height:min(25vw,220px)}
+  .hint{font-size:clamp(16px,2.5vh,22px)}
+  .mic{min-height:66px;padding:9px 28px}
+}
